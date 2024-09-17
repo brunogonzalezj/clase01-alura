@@ -5,11 +5,15 @@ const generateBtn = document.getElementById('generateBtn');
 const copyBtn = document.getElementById('copyBtn');
 const copyMessage = document.getElementById('copyMessage');
 
+lengthSlider.addEventListener('input', function() {
+    lengthValue.textContent = this.value;
+});
+
 function generatePassword(length) {
     const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+';
     let password = '';
     for (let i = 0; i < length; i++) {
-    password += charset.charAt(Math.floor(Math.random() * charset.length));
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
     }
     return password;
 }
@@ -17,12 +21,8 @@ function generatePassword(length) {
 function updatePassword() {
     const length = lengthSlider.value;
     passwordInput.value = generatePassword(length);
+    lengthValue.textContent = length;
 }
-
-lengthSlider.addEventListener('input', function() {
-    lengthValue.textContent = this.value;
-    updatePassword();
-});
 
 generateBtn.addEventListener('click', updatePassword);
 
@@ -33,6 +33,5 @@ copyBtn.addEventListener('click', function() {
     setTimeout(() => copyMessage.classList.add('hidden'), 2000);
 });
 
-    // Generate initial password
+// Generate initial password
 updatePassword();
-
